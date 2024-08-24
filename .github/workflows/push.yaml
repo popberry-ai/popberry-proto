@@ -11,7 +11,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,20 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
       - name: Commit Builds
         run: |
-          git commit -am "Automated report"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add gen
+          git commit -m "chore: generate protobuf artifacts"
           git push
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@popberry-ai'
+      - name: Install dependencies
+        run: npm install
       - name: Publish package
         run: npm publish
