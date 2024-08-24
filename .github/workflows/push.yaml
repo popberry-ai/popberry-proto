@@ -31,7 +31,9 @@ jobs:
         run: npm run generate
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Commit Builds
+        run: |
+          git commit -am "Automated report"
+          git push
       - name: Publish package
         run: npm publish
