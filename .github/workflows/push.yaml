@@ -54,5 +54,7 @@ jobs:
           scope: '@popberry-ai'
       - name: Install dependencies
         run: npm install
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
       - name: Publish package
         run: npm publish
