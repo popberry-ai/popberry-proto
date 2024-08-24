@@ -1,6 +1,6 @@
 {
   "name": "@popberry-ai/popberry-proto",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "popberry-ai proto files",
   "main": "index.js",
   "scripts": {
