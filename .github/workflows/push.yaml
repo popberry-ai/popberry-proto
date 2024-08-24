@@ -13,6 +13,8 @@ permissions:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,18 +31,20 @@ jobs:
         run: npm install
       - name: Generate Protobuf Artifacts
         run: npm run generate
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
+
       - name: Commit Builds
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+          git rm --cached gen -r
           git add -f gen
-          git commit -m "chore: generate protobuf artifacts"
-          git push
+          git commit -m "chore: generate protobuf artifacts" || true
+          git push || true
   package:
     runs-on: ubuntu-latest
     needs: build-and-push
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -49,9 +53,5 @@ jobs:
           scope: '@popberry-ai'
       - name: Install dependencies
         run: npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
       - name: Publish package
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later

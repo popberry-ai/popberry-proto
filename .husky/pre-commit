@@ -1,0 +1,3 @@
+npx buf lint
+npx buf format
+git update-index --assume-unchanged gen/
