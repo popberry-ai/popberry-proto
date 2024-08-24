@@ -36,7 +36,7 @@ jobs:
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git rm --cached gen -r
+          git rm --cached gen -r || true
           git update-index --no-assume-unchanged gen/
           git add -f gen
           git commit --no-verify -m "chore: generate protobuf artifacts" || true
