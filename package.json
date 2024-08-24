@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:popberry-ai/popberry-proto.git"
+    "url": "git+ssh://git@github.com/popberry-ai/popberry-proto.git"
   },
   "publishConfig": {
     "@popberry-ai:registry": "https://npm.pkg.github.com"
