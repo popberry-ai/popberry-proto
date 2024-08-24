@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions: 
+  contents: write
+  packages: write
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,6 +19,12 @@ jobs:
         with:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@popberry-ai'
+      - uses: bufbuild/buf-action@v1
+        with:
+          push: false
+          lint: true
+          format: true
+          token: ${{ secrets.BUF_TOKEN }}
       - name: Install dependencies
         run: npm install
       - name: Generate Protobuf Artifacts
@@ -21,9 +32,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
       - name: Commit changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: '["proto/**/*","gen/go/**/*"]'
-          github_token: ${{ secrets.TOKEN }} #fix later
+        uses: stefanzweifel/git-auto-commit-action@v5
       - name: Publish package
         run: npm publish
