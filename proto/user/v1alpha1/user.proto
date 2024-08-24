@@ -65,4 +65,5 @@ message User {
   string lastname = 5;
   string email = 6;
   string rank = 7;
+  string wallet_id = 8;
 }
