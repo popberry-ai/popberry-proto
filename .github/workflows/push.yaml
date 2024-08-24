@@ -49,6 +49,8 @@ jobs:
           scope: '@popberry-ai'
       - name: Install dependencies
         run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
       - name: Publish package
         run: npm publish
         env:
