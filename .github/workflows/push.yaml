@@ -21,4 +21,10 @@ jobs:
       - name: Publish package
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: '["proto/**/*","gen/go/**/*"]'
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
