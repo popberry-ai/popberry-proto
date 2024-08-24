@@ -15,4 +15,6 @@ jobs:
       - uses: bufbuild/buf-action@v1
         with:
           push: false
+          lint: true
+          format: true
           token: ${{ secrets.BUF_TOKEN }}
