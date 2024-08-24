@@ -1,0 +1,7 @@
+/gen/**/*
+!gen/ts/**/*
+go.*
+.devcontainer/
+buf.*
+scripts/
+.github/

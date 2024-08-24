@@ -1,0 +1,33 @@
+{
+  "name": "@popberry-ai/popberry-proto",
+  "version": "0.0.1",
+  "description": "popberry-ai proto files",
+  "main": "index.js",
+  "scripts": {
+    "generate": "buf generate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:popberry-ai/popberry-proto.git"
+  },
+  "publishConfig": {
+    "@popberry-ai:registry": "https://npm.pkg.github.com"
+  },
+  "keywords": [
+    "grpc",
+    "proto"
+  ],
+  "author": "popberry",
+  "license": "ISC",
+  "devDependencies": {
+    "@bufbuild/protoc-gen-es": "^2.0.0",
+    "protoc-gen-nestjs": "^0.2.0",
+    "@bufbuild/buf": "^1.38.0"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.0.0",
+    "@grpc/grpc-js": "^1.11.1",
+    "@grpc/proto-loader": "^0.7.13",
+    "@nestjs/microservices": "^10.4.1"
+  }
+}

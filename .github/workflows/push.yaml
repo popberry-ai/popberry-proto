@@ -1,0 +1,24 @@
+name: Build and bump tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@popberry-ai'
+      - name: Install dependencies
+        run: npm install
+      - name: Generate Protobuf Artifacts
+        run: npm run generate
+      - name: Publish package
+        run: npm publish --access restricted
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
