@@ -18,8 +18,6 @@ jobs:
         run: npm install
       - name: Generate Protobuf Artifacts
         run: npm run generate
-      - name: Publish package
-        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
       - name: Commit changes
@@ -27,3 +25,5 @@ jobs:
         with:
           add: '["proto/**/*","gen/go/**/*"]'
           github_token: ${{ secrets.TOKEN }} #fix later
+      - name: Publish package
+        run: npm publish
