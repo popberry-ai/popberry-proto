@@ -6,6 +6,7 @@
       "DOM"
     ],
     "module": "CommonJS",
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "rootDir": "./src",
     "rootDirs": [
