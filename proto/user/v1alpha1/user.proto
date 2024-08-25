@@ -47,6 +47,7 @@ message CheckUserPasswordRequest {
 message CheckUserPasswordResponse {
   bool is_success = 1;
   User user = 2;
+  bool rank = 3;
 }
 
 message DeleteUserRequest {
