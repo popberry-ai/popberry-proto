@@ -13,9 +13,9 @@ plugins:
     opt: paths=source_relative
   - local: protoc-gen-es
     opt: target=ts
-    out: gen/ts
+    out: src
   - local: protoc-gen-nestjs
     opt: target=ts
-    out: gen/ts
+    out: src
 inputs:
   - directory: proto

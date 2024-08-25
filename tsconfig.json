@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": [
+      "ES6",
+      "DOM"
+    ],
+    "module": "CommonJS",
+    "experimentalDecorators": true,
+    "rootDir": "./src",
+    "rootDirs": [
+      "src"
+    ],
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./dist/cjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "declarationDir": "./dist/types",
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "examples",
+  ],
+  "ctix": {
+    "spinnerStream": "stdout",
+    "progressStream": "stdout",
+    "reasonerStream": "stderr",
+    "options": [
+      {
+        "mode": "module",
+        "project": "tsconfig.json",
+        "exportFilename": "src/index.ts",
+        "useSemicolon": true,
+        "useBanner": false,
+        "useTimestamp": true,
+        "quote": "'",
+        "directive": "",
+        "fileExt": "none",
+        "overwrite": true,
+        "backup": false,
+        "generationStyle": "auto",
+      }
+    ]
+  }
+}
