@@ -1,6 +1,6 @@
 {
   "name": "@popberry-ai/popberry-proto",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "popberry-ai proto files",
   "main": "dist/cjs/index.js",
   "module": "dist/esm5/index.js",
