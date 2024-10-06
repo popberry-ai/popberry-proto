@@ -24,6 +24,8 @@ jobs:
           format: true
           token: ${{ secrets.BUF_TOKEN }}
           setup_only: false
+      - name: Generate Protobuf Artifacts
+        run: ./scripts/build.sh
       - name: Commit Builds
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -43,8 +45,6 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
-      - name: Generate Protobuf Artifacts
-        run: npm run build
       - name:  'Automated Version Bump'
         uses:  'phips28/gh-action-bump-version@master'
         with:
