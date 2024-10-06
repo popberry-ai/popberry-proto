@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.BUF_TOKEN }}
           setup_only: false
       - name: Generate Protobuf Artifacts
-        run: ./scripts/build.sh
+        run: bash ./scripts/build.sh
       - name: Commit Builds
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
