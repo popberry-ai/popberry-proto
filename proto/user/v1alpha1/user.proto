@@ -2,14 +2,14 @@ syntax = "proto3";
 
 package user.v1alpha1;
 
-option go_package = "user/v1alpha1";
-
 import "google/protobuf/timestamp.proto";
 
+option go_package = "user/v1alpha1";
+
 service UserService {
-  rpc CreateUser(CreateUserRequest) returns (User);
-  rpc GetUser(GetUserRequest) returns (User);
-  rpc UpdateUser(UpdateUserRequest) returns (User);
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
 }
@@ -35,7 +35,7 @@ message User {
   double point = 18;
   double exp = 19;
   string dob = 20;
-  Wallet wallet = 21;  // Added Wallet reference
+  Wallet wallet = 21; // Added Wallet reference
 }
 
 message Wallet {
@@ -53,30 +53,37 @@ message Wallet {
 }
 
 enum Gender {
-  MALE = 0;
-  FEMALE = 1;
-  API = 2;
+  GENDER_UNSPECIFIED = 0;
+  GENDER_MALE = 1;
+  GENDER_FEMALE = 2;
+  GENDER_API = 3;
 }
 
 enum UserStatus {
-  ACTIVE = 0;
-  BAN = 1;
+  USER_STATUS_UNSPECIFIED = 0;
+  USER_STATUS_ACTIVE = 1;
+  USER_STATUS_BAN = 2;
 }
 
 enum UserRole {
-  MEMBER = 0;
-  VIP = 1;
-  FREE = 2;
-  ADMIN = 3;
-  FREE_OUT = 4;
-  SUPERADMIN = 5;
-  PARTNER = 6;
-  SUBADMIN = 7;
-  DEPOSIT_ADMIN = 8;
-  WITHDRAW_ADMIN = 9;
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_MEMBER = 1;
+  USER_ROLE_VIP = 2;
+  USER_ROLE_FREE = 3;
+  USER_ROLE_ADMIN = 4;
+  USER_ROLE_FREE_OUT = 5;
+  USER_ROLE_SUPERADMIN = 6;
+  USER_ROLE_PARTNER = 7;
+  USER_ROLE_SUBADMIN = 8;
+  USER_ROLE_DEPOSIT_ADMIN = 9;
+  USER_ROLE_WITHDRAW_ADMIN = 10;
 }
 
 message CreateUserRequest {
+  User user = 1;
+}
+
+message CreateUserResponse {
   User user = 1;
 }
 
@@ -84,7 +91,15 @@ message GetUserRequest {
   string username = 1;
 }
 
+message GetUserResponse {
+  User user = 1;
+}
+
 message UpdateUserRequest {
+  User user = 1;
+}
+
+message UpdateUserResponse {
   User user = 1;
 }
 
