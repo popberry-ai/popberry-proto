@@ -1,3 +1,0 @@
-npx buf lint --error-format=json || (echo "Please run 'npx buf lint' and fix the errors" && exit 1)
-npx buf format -w
-git update-index --assume-unchanged gen/

@@ -4,66 +4,104 @@ package user.v1alpha1;
 
 option go_package = "user/v1alpha1";
 
-service UsersService {
-  rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
-  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
-  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
-  rpc CheckUserPassword(CheckUserPasswordRequest) returns (CheckUserPasswordResponse) {}
+import "google/protobuf/timestamp.proto";
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (User);
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc UpdateUser(UpdateUserRequest) returns (User);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
 }
 
-message GetUserRequest {
-  string id = 1;
+message User {
+  int32 id = 1;
+  string username = 2;
+  string firstname = 3;
+  string lastname = 4;
+  Gender gender = 5;
+  string lineid = 6;
+  string banknumber = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+  UserStatus status = 10;
+  int32 bank_categories_id = 11;
+  int32 ways_id = 12;
+  int32 wallets_id = 13;
+  UserRole role = 14;
+  string line_user_id = 15;
+  string affiliate_id = 16;
+  string rank = 17;
+  double point = 18;
+  double exp = 19;
+  string dob = 20;
+  Wallet wallet = 21;  // Added Wallet reference
 }
 
-message GetUserResponse {
-  User user = 1;
+message Wallet {
+  int32 id = 1;
+  double balance = 2;
+  string status = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+  double turnover = 6;
+  double point = 7;
+  int32 promotion_id = 8;
+  int32 user_promotion_id = 9;
+  double deposit_turnover = 10;
+  double deposit_turnover_counter = 11;
+}
+
+enum Gender {
+  MALE = 0;
+  FEMALE = 1;
+  API = 2;
+}
+
+enum UserStatus {
+  ACTIVE = 0;
+  BAN = 1;
+}
+
+enum UserRole {
+  MEMBER = 0;
+  VIP = 1;
+  FREE = 2;
+  ADMIN = 3;
+  FREE_OUT = 4;
+  SUPERADMIN = 5;
+  PARTNER = 6;
+  SUBADMIN = 7;
+  DEPOSIT_ADMIN = 8;
+  WITHDRAW_ADMIN = 9;
 }
 
 message CreateUserRequest {
   User user = 1;
-  string password = 2;
 }
 
-message CreateUserResponse {
-  User user = 1;
+message GetUserRequest {
+  string username = 1;
 }
 
 message UpdateUserRequest {
-  string id = 1;
-  User user = 2;
-}
-
-message UpdateUserResponse {
-  bool is_success = 1;
-  User user = 2;
-}
-
-message CheckUserPasswordRequest {
-  string username = 1;
-  string password = 2;
-}
-
-message CheckUserPasswordResponse {
-  bool is_success = 1;
-  User user = 2;
+  User user = 1;
 }
 
 message DeleteUserRequest {
-  string id = 1;
+  int32 id = 1;
 }
 
 message DeleteUserResponse {
-  bool is_success = 1;
+  bool success = 1;
 }
 
-message User {
-  string id = 1;
-  string username = 2;
-  string tel_no = 3;
-  string firstname = 4;
-  string lastname = 5;
-  string email = 6;
-  string rank = 7;
-  string wallet_id = 8;
+message ListUsersRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total_count = 2;
 }

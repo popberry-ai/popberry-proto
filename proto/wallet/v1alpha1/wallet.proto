@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package wallet.v1alpha1;
+
+option go_package = "wallet/v1alpha1";
+
+// Define the Wallet service
+service WalletService {
+  // Method for updating wallet balance using transaction records
+  rpc UpdateBalance(RecordTransactionRequest) returns (RecordTransactionResponse);
+
+  // Method for identifying the existence of a user with various identification methods
+  rpc IdentifyUser(IdentifyUserRequest) returns (IdentifyUserResponse);
+
+  // Method for updating the transaction response after another service has processed the request
+  rpc UpdateTransactionResponse(UpdateTransactionResponseRequest) returns (UpdateTransactionResponseResponse);
+}
+
+// Request message for recording a transaction
+message RecordTransactionRequest {
+  repeated RequestResponse requests = 1; // List of request and response pairs
+  string tenant_id = 2;    // tenant id
+  double bet_amount = 3;   // Bet amount
+  double win_amount = 4;   // Win amount
+  double winlose_amount = 5; // Win/Loss amount
+  string status = 6;       // Status of the transaction
+  string user_id = 7;      // User ID (or username)
+  string round_id = 8;     // Round ID
+  string txn_id = 9;       // Transaction ID
+  string parent_id = 10;   // Parent transaction ID (optional)
+  int32 game_id = 11;      // Game ID
+  string game_code = 12;   // Game code
+  int32 provider_id = 13;  // Provider ID
+  string provider_code = 14; // Provider code
+}
+
+// Response message for recording a transaction
+message RecordTransactionResponse {
+  bool success = 1;        // Indicates if the operation was successful
+  string transaction_id = 2; // MongoDB ObjectId as a string
+  double before = 3;       // Balance before the transaction
+  double amount = 4;       // Transaction amount
+  double after = 5;        // Balance after the transaction
+  string message = 6;      // Optional message for additional information
+}
+
+// Request message for identifying user existence with various methods
+message IdentifyUserRequest {
+  string user_id = 1;      // User ID (optional)
+  string user_token = 2;   // User Token (optional)
+  string username = 3;     // Username (optional)
+}
+
+// Response message for identifying user existence
+message IdentifyUserResponse {
+  bool exists = 1;         // Indicates if the user exists
+  string message = 2;      // Optional message for additional information
+}
+
+// Request message for updating the transaction response after another service has processed the request
+message UpdateTransactionResponseRequest {
+  string txn_id = 1;       // Transaction ID to identify which record to update
+  string response = 2;    // Updated response data (JSON or any other format)
+}
+
+// Response message for updating the transaction response
+message UpdateTransactionResponseResponse {
+  bool success = 1;        // Indicates if the update was successful
+  string message = 2;      // Optional message for additional information
+}
+
+// Message for request and response pairs
+message RequestResponse {
+  string request = 1;      // Request data
+  string response = 2;    // Response data (JSON or any other format)
+}

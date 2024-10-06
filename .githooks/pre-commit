@@ -1,0 +1,7 @@
+if ! command -v buf &> /dev/null
+then
+  sh ../scripts/setup.sh
+fi
+buf lint --error-format=json || (echo "Please run 'buf lint' and fix the errors" && exit 1)
+buf format -w
+git update-index --assume-unchanged gen/

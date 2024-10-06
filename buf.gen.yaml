@@ -10,12 +10,5 @@ plugins:
     opt: paths=source_relative
   - remote: buf.build/grpc/go
     out: gen/go
-    opt: paths=source_relative
-  - local: protoc-gen-es
-    opt: target=ts
-    out: src
-  - local: protoc-gen-nestjs
-    opt: target=ts
-    out: src
 inputs:
   - directory: proto
