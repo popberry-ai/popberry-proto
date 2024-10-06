@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+      - feature/*
+      - feat/*
+      - hotfix/*
+      - release/*
+  pull_request: 
+    types: 
+      - closed
 
 permissions: 
   contents: write
@@ -13,8 +20,6 @@ permissions:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.TOKEN }} #fix later
     steps:
       - uses: actions/checkout@v4
       - uses: bufbuild/buf-action@v1
@@ -38,15 +43,14 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     needs: build-and-push
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
+    if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: main
       - name:  'Automated Version Bump'
-        uses:  'phips28/gh-action-bump-version@master'
+        uses: phish108/autotag-action@v1.1.55
         with:
-          tag-prefix:  'v'
-          default-bump:  'patch'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          with-v: "true"
