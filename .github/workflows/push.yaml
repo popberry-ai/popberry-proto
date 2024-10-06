@@ -23,10 +23,7 @@ jobs:
           lint: true
           format: true
           token: ${{ secrets.BUF_TOKEN }}
-      - name: Install dependencies
-        run: npm install
-      - name: Generate Protobuf Artifacts
-        run: npm run generate
+          setup_only: false
       - name: Commit Builds
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
