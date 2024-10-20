@@ -1,0 +1,38 @@
+syntax = "proto3";
+package game.v1alpha1;
+
+option go_package = "game/v1alpha1";
+
+enum GameStatus {
+  GAME_STATUS_UNSPECIFIED = 0;
+  GAME_STATUS_ACTIVE = 1;
+  GAME_STATUS_MAINTENANCE = 2;
+  GAME_STATUS_CLOSED = 3;
+}
+
+enum GameCategory {
+  GAME_CATEGORY_UNSPECIFIED = 0;
+  GAME_CATEGORY_SLOT = 1;
+  GAME_CATEGORY_LIVE = 2;
+  GAME_CATEGORY_SPORT = 3;
+  GAME_CATEGORY_FISH = 4;
+  GAME_CATEGORY_LOTTERY = 5;
+  GAME_CATEGORY_POKER = 6;
+  GAME_CATEGORY_OTHER = 7;
+}
+
+enum GameProvider {
+  GAME_PROVIDER_UNSPECIFIED = 0;
+  GAME_PROVIDER_JOKER = 1;
+}
+
+message Game {
+  string id = 1;
+  string name = 2;
+  GameProvider provider = 3;
+  string image_url = 4;
+  GameCategory category = 5;
+  repeated string tags = 6;
+  GameStatus status = 7;
+  optional int32 win_rate = 8;
+}
