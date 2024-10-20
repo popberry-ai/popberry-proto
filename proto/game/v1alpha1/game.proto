@@ -3,36 +3,40 @@ package game.v1alpha1;
 
 option go_package = "game/v1alpha1";
 
+// Represents the status of a game.
 enum GameStatus {
-  GAME_STATUS_UNSPECIFIED = 0;
-  GAME_STATUS_ACTIVE = 1;
-  GAME_STATUS_MAINTENANCE = 2;
-  GAME_STATUS_CLOSED = 3;
+  GAME_STATUS_UNSPECIFIED = 0; // Default value. This value is unused.
+  GAME_STATUS_ACTIVE = 1; // The game is currently active and available for play.
+  GAME_STATUS_MAINTENANCE = 2; // The game is under maintenance and temporarily unavailable.
+  GAME_STATUS_CLOSED = 3; // The game is permanently closed and unavailable.
 }
 
+// Represents the category of a game.
 enum GameCategory {
-  GAME_CATEGORY_UNSPECIFIED = 0;
-  GAME_CATEGORY_SLOT = 1;
-  GAME_CATEGORY_LIVE = 2;
-  GAME_CATEGORY_SPORT = 3;
-  GAME_CATEGORY_FISH = 4;
-  GAME_CATEGORY_LOTTERY = 5;
-  GAME_CATEGORY_POKER = 6;
-  GAME_CATEGORY_OTHER = 7;
+  GAME_CATEGORY_UNSPECIFIED = 0; // Default value. This value is unused.
+  GAME_CATEGORY_SLOT = 1; // Slot games.
+  GAME_CATEGORY_LIVE = 2; // Live games.
+  GAME_CATEGORY_SPORT = 3; // Sports games.
+  GAME_CATEGORY_FISH = 4; // Fish games.
+  GAME_CATEGORY_LOTTERY = 5; // Lottery games.
+  GAME_CATEGORY_POKER = 6; // Poker games.
+  GAME_CATEGORY_OTHER = 7; // Other types of games.
 }
 
+// Represents the provider of a game.
 enum GameProvider {
-  GAME_PROVIDER_UNSPECIFIED = 0;
-  GAME_PROVIDER_JOKER = 1;
+  GAME_PROVIDER_UNSPECIFIED = 0; // Default value. This value is unused.
+  GAME_PROVIDER_JOKER = 1; // Joker game provider.
 }
 
+// Represents a game with various attributes.
 message Game {
-  string id = 1;
-  string name = 2;
-  GameProvider provider = 3;
-  string image_url = 4;
-  GameCategory category = 5;
-  repeated string tags = 6;
-  GameStatus status = 7;
-  optional int32 win_rate = 8;
+  string id = 1; // Unique identifier for the game.
+  string name = 2; // Name of the game.
+  GameProvider provider = 3; // Provider of the game.
+  string image_url = 4; // URL to the game's image.
+  GameCategory category = 5; // Category of the game.
+  repeated string tags = 6; // Tags associated with the game.
+  GameStatus status = 7; // Current status of the game.
+  optional int32 win_rate = 8; // Optional win rate of the game.
 }

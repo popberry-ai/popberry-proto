@@ -5,71 +5,137 @@ import "game/v1alpha1/game.proto";
 
 option go_package = "game/joker/v1alpha1";
 
+// JokerService defines the service for handling Joker game operations.
 service JokerService {
+  // GameLogin allows a user to log in to the game.
   rpc GameLogin(GameLoginRequest) returns (GameLoginResponse) {}
+
+  // GetGameList retrieves a list of available games.
   rpc GetGameList(GetGameListRequest) returns (GetGameListResponse) {}
+
+  // GetGameRoundStatus retrieves the status of a specific game round.
   rpc GetGameRoundStatus(GetGameRoundStatusRequest) returns (GetGameRoundStatusResponse) {}
+
+  // GetGameDetail retrieves detailed information about a specific game round.
   rpc GetGameDetail(GetGameDetailRequest) returns (GetGameDetailResponse) {}
+
+  // GameSignout allows a user to sign out from the game.
   rpc GameSignout(GameSignoutRequest) returns (GameSignoutResponse) {}
 }
 
+// GameLoginRequest is the request message for logging in to the game.
 message GameLoginRequest {
+  // The username of the player.
   string username = 1;
+
+  // The code of the game to log in to.
   string game_code = 2;
+
+  // Indicates if the login is from a mobile device.
   bool is_mobile = 3;
+
+  // An optional token for authentication.
   optional string token = 4;
+
+  // An optional URL to redirect to after game logout.
   optional string redirect_url = 5;
+
+  // An optional IP address of the player.
   optional string ip = 6;
+
+  // An optional user agent string of the player's device.
   optional string user_agent = 7;
 }
 
+// GameLoginResponse is the response message for a game login request.
 message GameLoginResponse {
+  // Indicates if the login was successful.
   bool is_success = 1;
+
+  // The token generated upon successful login.
   string token = 2;
+
+  // The URL to redirect to after successful login.
   string url = 3;
 }
 
+// GetGameListRequest is the request message for retrieving a list of games.
 message GetGameListRequest {
+  // The number of games to retrieve per page.
   int32 page_size = 1;
+
+  // The token for the page to retrieve.
   string page_token = 2;
+
+  // An optional query string to filter the games.
   optional string query = 3;
 }
 
+// GetGameListResponse is the response message for a game list request.
 message GetGameListResponse {
+  // The list of games retrieved.
   repeated game.v1alpha1.Game games = 1;
+
+  // The token for the next page of results.
   string next_page_token = 2;
+
+  // The total number of games available.
   int32 total_size = 3;
 }
 
+// GetGameRoundStatusRequest is the request message for retrieving the status of a game round.
 message GetGameRoundStatusRequest {
+  // The ID of the game round.
   string round_id = 1;
 }
 
+// GameRoundStatus represents the status of a game round.
 enum GameRoundStatus {
+  // The status is unspecified.
   GAME_ROUND_STATUS_UNSPECIFIED = 0;
+
+  // The game round was successful.
   GAME_ROUND_STATUS_SUCCESS = 1;
+
+  // The game round was cancelled.
   GAME_ROUND_STATUS_CANCELLED = 2;
+
+  // The game round was settled.
   GAME_ROUND_STATUS_SETTLED = 3;
 }
 
+// GetGameRoundStatusResponse is the response message for a game round status request.
 message GetGameRoundStatusResponse {
+  // The status of the game round.
   GameRoundStatus status = 1;
+
+  // The amount associated with the game round.
   double amount = 2;
 }
 
+// GetGameDetailRequest is the request message for retrieving details of a game round.
 message GetGameDetailRequest {
+  // The ID of the game round.
   string round_id = 1;
 }
 
+// GetGameDetailResponse is the response message for a game detail request.
 message GetGameDetailResponse {
+  // Indicates if the request was successful.
   bool is_success = 1;
+
+  // An optional URL with more details about the game round.
   optional string url = 2;
 }
 
+// GameSignoutRequest is the request message for signing out from the game.
 message GameSignoutRequest {
+  // The username of the player.
   string username = 1;
 }
 
+// GameSignoutResponse is the response message for a game signout request.
 message GameSignoutResponse {
+  // Indicates if the signout was successful.
   bool is_success = 1;
 }
