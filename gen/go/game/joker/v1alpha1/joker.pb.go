@@ -7,7 +7,7 @@
 package jokerv1alpha1
 
 import (
-	v1alpha1 "github.com/popberry-ai/popberry-proto/game/v1alpha1"
+	v1alpha1 "github.com/popberry-ai/popberry-proto/gen/go/game/v1alpha1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -21,13 +21,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// GameRoundStatus represents the status of a game round.
 type GameRoundStatus int32
 
 const (
+	// The status is unspecified.
 	GameRoundStatus_GAME_ROUND_STATUS_UNSPECIFIED GameRoundStatus = 0
-	GameRoundStatus_GAME_ROUND_STATUS_SUCCESS     GameRoundStatus = 1
-	GameRoundStatus_GAME_ROUND_STATUS_CANCELLED   GameRoundStatus = 2
-	GameRoundStatus_GAME_ROUND_STATUS_SETTLED     GameRoundStatus = 3
+	// The game round was successful.
+	GameRoundStatus_GAME_ROUND_STATUS_SUCCESS GameRoundStatus = 1
+	// The game round was cancelled.
+	GameRoundStatus_GAME_ROUND_STATUS_CANCELLED GameRoundStatus = 2
+	// The game round was settled.
+	GameRoundStatus_GAME_ROUND_STATUS_SETTLED GameRoundStatus = 3
 )
 
 // Enum value maps for GameRoundStatus.
@@ -73,18 +78,26 @@ func (GameRoundStatus) EnumDescriptor() ([]byte, []int) {
 	return file_game_joker_v1alpha1_joker_proto_rawDescGZIP(), []int{0}
 }
 
+// GameLoginRequest is the request message for logging in to the game.
 type GameLoginRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Username    string  `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	GameCode    string  `protobuf:"bytes,2,opt,name=game_code,json=gameCode,proto3" json:"game_code,omitempty"`
-	IsMobile    bool    `protobuf:"varint,3,opt,name=is_mobile,json=isMobile,proto3" json:"is_mobile,omitempty"`
-	Token       *string `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	// The username of the player.
+	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	// The code of the game to log in to.
+	GameCode string `protobuf:"bytes,2,opt,name=game_code,json=gameCode,proto3" json:"game_code,omitempty"`
+	// Indicates if the login is from a mobile device.
+	IsMobile bool `protobuf:"varint,3,opt,name=is_mobile,json=isMobile,proto3" json:"is_mobile,omitempty"`
+	// An optional token for authentication.
+	Token *string `protobuf:"bytes,4,opt,name=token,proto3,oneof" json:"token,omitempty"`
+	// An optional URL to redirect to after game logout.
 	RedirectUrl *string `protobuf:"bytes,5,opt,name=redirect_url,json=redirectUrl,proto3,oneof" json:"redirect_url,omitempty"`
-	Ip          *string `protobuf:"bytes,6,opt,name=ip,proto3,oneof" json:"ip,omitempty"`
-	UserAgent   *string `protobuf:"bytes,7,opt,name=user_agent,json=userAgent,proto3,oneof" json:"user_agent,omitempty"`
+	// An optional IP address of the player.
+	Ip *string `protobuf:"bytes,6,opt,name=ip,proto3,oneof" json:"ip,omitempty"`
+	// An optional user agent string of the player's device.
+	UserAgent *string `protobuf:"bytes,7,opt,name=user_agent,json=userAgent,proto3,oneof" json:"user_agent,omitempty"`
 }
 
 func (x *GameLoginRequest) Reset() {
@@ -168,14 +181,18 @@ func (x *GameLoginRequest) GetUserAgent() string {
 	return ""
 }
 
+// GameLoginResponse is the response message for a game login request.
 type GameLoginResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	IsSuccess bool   `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	Token     string `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
-	Url       string `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
+	// Indicates if the login was successful.
+	IsSuccess bool `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
+	// The token generated upon successful login.
+	Token string `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	// The URL to redirect to after successful login.
+	Url string `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
 }
 
 func (x *GameLoginResponse) Reset() {
@@ -231,14 +248,18 @@ func (x *GameLoginResponse) GetUrl() string {
 	return ""
 }
 
+// GetGameListRequest is the request message for retrieving a list of games.
 type GetGameListRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PageSize  int32   `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken string  `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Query     *string `protobuf:"bytes,3,opt,name=query,proto3,oneof" json:"query,omitempty"`
+	// The number of games to retrieve per page.
+	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The token for the page to retrieve.
+	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// An optional query string to filter the games.
+	Query *string `protobuf:"bytes,3,opt,name=query,proto3,oneof" json:"query,omitempty"`
 }
 
 func (x *GetGameListRequest) Reset() {
@@ -294,14 +315,18 @@ func (x *GetGameListRequest) GetQuery() string {
 	return ""
 }
 
+// GetGameListResponse is the response message for a game list request.
 type GetGameListResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Games         []*v1alpha1.Game `protobuf:"bytes,1,rep,name=games,proto3" json:"games,omitempty"`
-	NextPageToken string           `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	TotalSize     int32            `protobuf:"varint,3,opt,name=total_size,json=totalSize,proto3" json:"total_size,omitempty"`
+	// The list of games retrieved.
+	Games []*v1alpha1.Game `protobuf:"bytes,1,rep,name=games,proto3" json:"games,omitempty"`
+	// The token for the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// The total number of games available.
+	TotalSize int32 `protobuf:"varint,3,opt,name=total_size,json=totalSize,proto3" json:"total_size,omitempty"`
 }
 
 func (x *GetGameListResponse) Reset() {
@@ -357,11 +382,13 @@ func (x *GetGameListResponse) GetTotalSize() int32 {
 	return 0
 }
 
+// GetGameRoundStatusRequest is the request message for retrieving the status of a game round.
 type GetGameRoundStatusRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The ID of the game round.
 	RoundId string `protobuf:"bytes,1,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 }
 
@@ -404,13 +431,16 @@ func (x *GetGameRoundStatusRequest) GetRoundId() string {
 	return ""
 }
 
+// GetGameRoundStatusResponse is the response message for a game round status request.
 type GetGameRoundStatusResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The status of the game round.
 	Status GameRoundStatus `protobuf:"varint,1,opt,name=status,proto3,enum=game.joker.v1alpha1.GameRoundStatus" json:"status,omitempty"`
-	Amount float64         `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	// The amount associated with the game round.
+	Amount float64 `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
 }
 
 func (x *GetGameRoundStatusResponse) Reset() {
@@ -459,11 +489,13 @@ func (x *GetGameRoundStatusResponse) GetAmount() float64 {
 	return 0
 }
 
+// GetGameDetailRequest is the request message for retrieving details of a game round.
 type GetGameDetailRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The ID of the game round.
 	RoundId string `protobuf:"bytes,1,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 }
 
@@ -506,13 +538,16 @@ func (x *GetGameDetailRequest) GetRoundId() string {
 	return ""
 }
 
+// GetGameDetailResponse is the response message for a game detail request.
 type GetGameDetailResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	IsSuccess bool    `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	Url       *string `protobuf:"bytes,2,opt,name=url,proto3,oneof" json:"url,omitempty"`
+	// Indicates if the request was successful.
+	IsSuccess bool `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
+	// An optional URL with more details about the game round.
+	Url *string `protobuf:"bytes,2,opt,name=url,proto3,oneof" json:"url,omitempty"`
 }
 
 func (x *GetGameDetailResponse) Reset() {
@@ -561,11 +596,13 @@ func (x *GetGameDetailResponse) GetUrl() string {
 	return ""
 }
 
+// GameSignoutRequest is the request message for signing out from the game.
 type GameSignoutRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The username of the player.
 	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 }
 
@@ -608,11 +645,13 @@ func (x *GameSignoutRequest) GetUsername() string {
 	return ""
 }
 
+// GameSignoutResponse is the response message for a game signout request.
 type GameSignoutResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Indicates if the signout was successful.
 	IsSuccess bool `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
 }
 
@@ -771,21 +810,22 @@ var file_game_joker_v1alpha1_joker_proto_rawDesc = []byte{
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x67, 0x61, 0x6d, 0x65, 0x2e, 0x6a,
 	0x6f, 0x6b, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x47, 0x61,
 	0x6d, 0x65, 0x53, 0x69, 0x67, 0x6e, 0x6f, 0x75, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x00, 0x42, 0xdc, 0x01, 0x0a, 0x17, 0x63, 0x6f, 0x6d, 0x2e, 0x67, 0x61, 0x6d, 0x65,
+	0x65, 0x22, 0x00, 0x42, 0xe3, 0x01, 0x0a, 0x17, 0x63, 0x6f, 0x6d, 0x2e, 0x67, 0x61, 0x6d, 0x65,
 	0x2e, 0x6a, 0x6f, 0x6b, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x42,
-	0x0a, 0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x47, 0x67,
+	0x0a, 0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x4e, 0x67,
 	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6f, 0x70, 0x62, 0x65, 0x72,
 	0x72, 0x79, 0x2d, 0x61, 0x69, 0x2f, 0x70, 0x6f, 0x70, 0x62, 0x65, 0x72, 0x72, 0x79, 0x2d, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x61, 0x6d, 0x65, 0x2f, 0x6a, 0x6f, 0x6b, 0x65, 0x72, 0x2f,
-	0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x3b, 0x6a, 0x6f, 0x6b, 0x65, 0x72, 0x76, 0x31,
-	0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0xa2, 0x02, 0x03, 0x47, 0x4a, 0x58, 0xaa, 0x02, 0x13, 0x47,
-	0x61, 0x6d, 0x65, 0x2e, 0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x2e, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68,
-	0x61, 0x31, 0xca, 0x02, 0x13, 0x47, 0x61, 0x6d, 0x65, 0x5c, 0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x5c,
-	0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0xe2, 0x02, 0x1f, 0x47, 0x61, 0x6d, 0x65, 0x5c,
-	0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x5c, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x5c, 0x47,
-	0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x15, 0x47, 0x61, 0x6d,
-	0x65, 0x3a, 0x3a, 0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x3a, 0x3a, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68,
-	0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x65, 0x6e, 0x2f, 0x67, 0x6f, 0x2f, 0x67, 0x61, 0x6d, 0x65,
+	0x2f, 0x6a, 0x6f, 0x6b, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x3b,
+	0x6a, 0x6f, 0x6b, 0x65, 0x72, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0xa2, 0x02, 0x03,
+	0x47, 0x4a, 0x58, 0xaa, 0x02, 0x13, 0x47, 0x61, 0x6d, 0x65, 0x2e, 0x4a, 0x6f, 0x6b, 0x65, 0x72,
+	0x2e, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0xca, 0x02, 0x13, 0x47, 0x61, 0x6d, 0x65,
+	0x5c, 0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x5c, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0xe2,
+	0x02, 0x1f, 0x47, 0x61, 0x6d, 0x65, 0x5c, 0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x5c, 0x56, 0x31, 0x61,
+	0x6c, 0x70, 0x68, 0x61, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x15, 0x47, 0x61, 0x6d, 0x65, 0x3a, 0x3a, 0x4a, 0x6f, 0x6b, 0x65, 0x72, 0x3a,
+	0x3a, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (

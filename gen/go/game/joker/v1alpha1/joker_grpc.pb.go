@@ -29,11 +29,18 @@ const (
 // JokerServiceClient is the client API for JokerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// JokerService defines the service for handling Joker game operations.
 type JokerServiceClient interface {
+	// GameLogin allows a user to log in to the game.
 	GameLogin(ctx context.Context, in *GameLoginRequest, opts ...grpc.CallOption) (*GameLoginResponse, error)
+	// GetGameList retrieves a list of available games.
 	GetGameList(ctx context.Context, in *GetGameListRequest, opts ...grpc.CallOption) (*GetGameListResponse, error)
+	// GetGameRoundStatus retrieves the status of a specific game round.
 	GetGameRoundStatus(ctx context.Context, in *GetGameRoundStatusRequest, opts ...grpc.CallOption) (*GetGameRoundStatusResponse, error)
+	// GetGameDetail retrieves detailed information about a specific game round.
 	GetGameDetail(ctx context.Context, in *GetGameDetailRequest, opts ...grpc.CallOption) (*GetGameDetailResponse, error)
+	// GameSignout allows a user to sign out from the game.
 	GameSignout(ctx context.Context, in *GameSignoutRequest, opts ...grpc.CallOption) (*GameSignoutResponse, error)
 }
 
@@ -98,11 +105,18 @@ func (c *jokerServiceClient) GameSignout(ctx context.Context, in *GameSignoutReq
 // JokerServiceServer is the server API for JokerService service.
 // All implementations must embed UnimplementedJokerServiceServer
 // for forward compatibility.
+//
+// JokerService defines the service for handling Joker game operations.
 type JokerServiceServer interface {
+	// GameLogin allows a user to log in to the game.
 	GameLogin(context.Context, *GameLoginRequest) (*GameLoginResponse, error)
+	// GetGameList retrieves a list of available games.
 	GetGameList(context.Context, *GetGameListRequest) (*GetGameListResponse, error)
+	// GetGameRoundStatus retrieves the status of a specific game round.
 	GetGameRoundStatus(context.Context, *GetGameRoundStatusRequest) (*GetGameRoundStatusResponse, error)
+	// GetGameDetail retrieves detailed information about a specific game round.
 	GetGameDetail(context.Context, *GetGameDetailRequest) (*GetGameDetailResponse, error)
+	// GameSignout allows a user to sign out from the game.
 	GameSignout(context.Context, *GameSignoutRequest) (*GameSignoutResponse, error)
 	mustEmbedUnimplementedJokerServiceServer()
 }
