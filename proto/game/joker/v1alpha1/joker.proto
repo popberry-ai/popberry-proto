@@ -1,0 +1,75 @@
+syntax = "proto3";
+package game.joker.v1alpha1;
+
+import "game/v1alpha1/game.proto";
+
+option go_package = "game/joker/v1alpha1";
+
+service JokerService {
+  rpc GameLogin(GameLoginRequest) returns (GameLoginResponse) {}
+  rpc GetGameList(GetGameListRequest) returns (GetGameListResponse) {}
+  rpc GetGameRoundStatus(GetGameRoundStatusRequest) returns (GetGameRoundStatusResponse) {}
+  rpc GetGameDetail(GetGameDetailRequest) returns (GetGameDetailResponse) {}
+  rpc GameSignout(GameSignoutRequest) returns (GameSignoutResponse) {}
+}
+
+message GameLoginRequest {
+  string username = 1;
+  string game_code = 2;
+  bool is_mobile = 3;
+  optional string token = 4;
+  optional string redirect_url = 5;
+  optional string ip = 6;
+  optional string user_agent = 7;
+}
+
+message GameLoginResponse {
+  bool is_success = 1;
+  string token = 2;
+  string url = 3;
+}
+
+message GetGameListRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  optional string query = 3;
+}
+
+message GetGameListResponse {
+  repeated game.v1alpha1.Game games = 1;
+  string next_page_token = 2;
+  int32 total_size = 3;
+}
+
+message GetGameRoundStatusRequest {
+  string round_id = 1;
+}
+
+enum GameRoundStatus {
+  GAME_ROUND_STATUS_UNSPECIFIED = 0;
+  GAME_ROUND_STATUS_SUCCESS = 1;
+  GAME_ROUND_STATUS_CANCELLED = 2;
+  GAME_ROUND_STATUS_SETTLED = 3;
+}
+
+message GetGameRoundStatusResponse {
+  GameRoundStatus status = 1;
+  double amount = 2;
+}
+
+message GetGameDetailRequest {
+  string round_id = 1;
+}
+
+message GetGameDetailResponse {
+  bool is_success = 1;
+  optional string url = 2;
+}
+
+message GameSignoutRequest {
+  string username = 1;
+}
+
+message GameSignoutResponse {
+  bool is_success = 1;
+}
