@@ -1,9 +1,6 @@
 {
 	"name": "Popberry Protobuffers",
 	"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
-	"features": {
-		"ghcr.io/marcozac/devcontainer-features/buf:1": {}
-	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -19,5 +16,19 @@
 				"github.vscode-github-actions"
 			]
 		}
-	}
+	},
+	"mounts": [
+		{
+			"type": "bind",
+			"source": "${localEnv:HOME}/.ssh",
+			"target": "/home/vscode/.ssh"
+		},
+		{
+			"type": "bind",
+			"source": "${localEnv:HOME}/.gitconfig",
+			"target": "/home/vscode/.gitconfig"
+		}
+	],
+	"initializeCommand": "docker network create popberry || true",
+	"postCreateCommand": "./scripts/setup.sh"
 }

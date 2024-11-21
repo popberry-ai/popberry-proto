@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "game/joker/v1alpha1/joker.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "JokerService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1alpha1Game": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the game."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the game."
+        },
+        "provider": {
+          "$ref": "#/definitions/v1alpha1GameProvider",
+          "description": "Provider of the game."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to the game's image."
+        },
+        "category": {
+          "$ref": "#/definitions/v1alpha1GameCategory",
+          "description": "Category of the game."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags associated with the game."
+        },
+        "status": {
+          "$ref": "#/definitions/v1alpha1GameStatus",
+          "description": "Current status of the game."
+        },
+        "winRate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional win rate of the game."
+        }
+      },
+      "description": "Represents a game with various attributes."
+    },
+    "v1alpha1GameCategory": {
+      "type": "string",
+      "enum": [
+        "GAME_CATEGORY_UNSPECIFIED",
+        "GAME_CATEGORY_SLOT",
+        "GAME_CATEGORY_LIVE",
+        "GAME_CATEGORY_SPORT",
+        "GAME_CATEGORY_FISH",
+        "GAME_CATEGORY_LOTTERY",
+        "GAME_CATEGORY_POKER",
+        "GAME_CATEGORY_OTHER"
+      ],
+      "default": "GAME_CATEGORY_UNSPECIFIED",
+      "description": "Represents the category of a game.\n\n - GAME_CATEGORY_UNSPECIFIED: Default value. This value is unused.\n - GAME_CATEGORY_SLOT: Slot games.\n - GAME_CATEGORY_LIVE: Live games.\n - GAME_CATEGORY_SPORT: Sports games.\n - GAME_CATEGORY_FISH: Fish games.\n - GAME_CATEGORY_LOTTERY: Lottery games.\n - GAME_CATEGORY_POKER: Poker games.\n - GAME_CATEGORY_OTHER: Other types of games."
+    },
+    "v1alpha1GameLoginResponse": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean",
+          "description": "Indicates if the login was successful."
+        },
+        "token": {
+          "type": "string",
+          "description": "The token generated upon successful login."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL to redirect to after successful login."
+        }
+      },
+      "description": "GameLoginResponse is the response message for a game login request."
+    },
+    "v1alpha1GameProvider": {
+      "type": "string",
+      "enum": [
+        "GAME_PROVIDER_UNSPECIFIED",
+        "GAME_PROVIDER_JOKER"
+      ],
+      "default": "GAME_PROVIDER_UNSPECIFIED",
+      "description": "Represents the provider of a game.\n\n - GAME_PROVIDER_UNSPECIFIED: Default value. This value is unused.\n - GAME_PROVIDER_JOKER: Joker game provider."
+    },
+    "v1alpha1GameRoundStatus": {
+      "type": "string",
+      "enum": [
+        "GAME_ROUND_STATUS_UNSPECIFIED",
+        "GAME_ROUND_STATUS_SUCCESS",
+        "GAME_ROUND_STATUS_CANCELLED",
+        "GAME_ROUND_STATUS_SETTLED"
+      ],
+      "default": "GAME_ROUND_STATUS_UNSPECIFIED",
+      "description": "GameRoundStatus represents the status of a game round.\n\n - GAME_ROUND_STATUS_UNSPECIFIED: The status is unspecified.\n - GAME_ROUND_STATUS_SUCCESS: The game round was successful.\n - GAME_ROUND_STATUS_CANCELLED: The game round was cancelled.\n - GAME_ROUND_STATUS_SETTLED: The game round was settled."
+    },
+    "v1alpha1GameSignoutResponse": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean",
+          "description": "Indicates if the signout was successful."
+        }
+      },
+      "description": "GameSignoutResponse is the response message for a game signout request."
+    },
+    "v1alpha1GameStatus": {
+      "type": "string",
+      "enum": [
+        "GAME_STATUS_UNSPECIFIED",
+        "GAME_STATUS_ACTIVE",
+        "GAME_STATUS_MAINTENANCE",
+        "GAME_STATUS_CLOSED"
+      ],
+      "default": "GAME_STATUS_UNSPECIFIED",
+      "description": "Represents the status of a game.\n\n - GAME_STATUS_UNSPECIFIED: Default value. This value is unused.\n - GAME_STATUS_ACTIVE: The game is currently active and available for play.\n - GAME_STATUS_MAINTENANCE: The game is under maintenance and temporarily unavailable.\n - GAME_STATUS_CLOSED: The game is permanently closed and unavailable."
+    },
+    "v1alpha1GetGameDetailResponse": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean",
+          "description": "Indicates if the request was successful."
+        },
+        "url": {
+          "type": "string",
+          "description": "An optional URL with more details about the game round."
+        }
+      },
+      "description": "GetGameDetailResponse is the response message for a game detail request."
+    },
+    "v1alpha1GetGameListResponse": {
+      "type": "object",
+      "properties": {
+        "games": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1alpha1Game"
+          },
+          "description": "The list of games retrieved."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The token for the next page of results."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of games available."
+        }
+      },
+      "description": "GetGameListResponse is the response message for a game list request."
+    },
+    "v1alpha1GetGameRoundStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1alpha1GameRoundStatus",
+          "description": "The status of the game round."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "The amount associated with the game round."
+        }
+      },
+      "description": "GetGameRoundStatusResponse is the response message for a game round status request."
+    }
+  }
+}
