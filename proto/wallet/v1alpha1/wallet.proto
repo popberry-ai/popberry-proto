@@ -32,6 +32,7 @@ message UpdateBalanceRequest {
   string game_code = 12; // Game code
   int32 provider_id = 13; // Provider ID
   string provider_code = 14; // Provider code
+  double turnover = 15;
 }
 
 // Response message for updating wallet balance
