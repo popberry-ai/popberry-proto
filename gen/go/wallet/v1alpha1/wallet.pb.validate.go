@@ -117,6 +117,8 @@ func (m *UpdateBalanceRequest) validate(all bool) error {
 
 	// no validation rules for ProviderCode
 
+	// no validation rules for Turnover
+
 	if len(errors) > 0 {
 		return UpdateBalanceRequestMultiError(errors)
 	}
