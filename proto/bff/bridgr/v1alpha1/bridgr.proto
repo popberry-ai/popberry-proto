@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package bff.bridgr.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "bff/bridgr/v1alpha1";
+
+enum Type {
+  TYPE_UNSPECIFIED = 0;
+  TYPE_SMS = 1;
+  TYPE_NOTIFICATION = 2;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_HEALTHY = 1;
+  STATUS_UNHEALTHY = 2;
+}
+
+message ForwardingRecord {
+  string id = 1;
+  Type type = 2;
+  string recipient = 3;
+  string content = 4;
+  google.protobuf.Timestamp timestamp = 5;
+  bool success = 6;
+}
