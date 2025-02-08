@@ -38,12 +38,12 @@ jobs:
           git rm --cached gen -r || true
           git update-index --no-assume-unchanged gen/
           git add -f gen
-          git commit --no-verify -m "chore: generate protobuf artifacts" || true
+          git commit --no-verify -m "chore: generate protobuf artifacts [skip ci]" || true
           git push || true
   tag:
     runs-on: ubuntu-latest
     needs: build-and-push
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
         with:
