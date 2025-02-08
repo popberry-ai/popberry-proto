@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package bff.bridgr.v1alpha1;
 
-option go_package = "bff/bridgr/v1alpha1";
-
-import "google/protobuf/timestamp.proto";
 import "bff/bridgr/v1alpha1/bridgr.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "bff/bridgr/v1alpha1";
 
 service BridgrService {
   // Device management
@@ -78,7 +78,6 @@ message ForwardSMSRequest {
 message ForwardSMSResponse {
   bool success = 1;
   string message_id = 2;
-  
 }
 
 message ForwardNotificationRequest {

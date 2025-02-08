@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package bff.bridgr.v1alpha1;
 
-option go_package = "bff/bridgr/v1alpha1";
-
 import "google/protobuf/timestamp.proto";
+
+option go_package = "bff/bridgr/v1alpha1";
 
 enum Type {
   TYPE_UNSPECIFIED = 0;
