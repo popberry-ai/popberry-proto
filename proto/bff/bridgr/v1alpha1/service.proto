@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package bff.bridgr.v1alpha1;
+
+option go_package = "bff/bridgr/v1alpha1";
+
+import "google/protobuf/timestamp.proto";
+import "bff/bridgr/v1alpha1/bridgr.proto";
+
+service BridgrService {
+  // Device management
+  rpc RegisterDevice(RegisterDeviceRequest) returns (RegisterDeviceResponse) {}
+  rpc UnregisterDevice(UnregisterDeviceRequest) returns (UnregisterDeviceResponse) {}
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse) {}
+
+  // Configuration management
+  rpc GetConfig(GetConfigRequest) returns (GetConfigResponse) {}
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
+
+  // Forwarding services
+  rpc ForwardSMS(ForwardSMSRequest) returns (ForwardSMSResponse) {}
+  rpc ForwardNotification(ForwardNotificationRequest) returns (ForwardNotificationResponse) {}
+  rpc GetForwardingHistory(GetForwardingHistoryRequest) returns (GetForwardingHistoryResponse) {}
+}
+
+message RegisterDeviceRequest {
+  string machine_id = 1;
+  string machine_prefix = 2;
+  string machine_name = 3;
+  string agent_prefix = 4;
+}
+
+message RegisterDeviceResponse {
+  string device_token = 1;
+}
+
+message UnregisterDeviceRequest {
+  string device_token = 1;
+}
+
+message UnregisterDeviceResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message HealthCheckRequest {
+  string device_token = 1;
+}
+
+message HealthCheckResponse {
+  Status status = 1;
+}
+
+message GetConfigRequest {
+  string device_token = 1;
+}
+
+message GetConfigResponse {
+  map<string, string> config = 1;
+}
+
+message UpdateConfigRequest {
+  string device_token = 1;
+  map<string, string> config = 2;
+}
+
+message UpdateConfigResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message ForwardSMSRequest {
+  string device_token = 1;
+  string recipient = 2;
+  string message = 3;
+}
+
+message ForwardSMSResponse {
+  bool success = 1;
+  string message_id = 2;
+  
+}
+
+message ForwardNotificationRequest {
+  string device_token = 1;
+  string title = 2;
+  string body = 3;
+  map<string, string> metadata = 4;
+}
+
+message ForwardNotificationResponse {
+  string notification_id = 1;
+}
+
+message GetForwardingHistoryRequest {
+  string device_token = 1;
+  google.protobuf.Timestamp start_time = 2;
+  google.protobuf.Timestamp end_time = 3;
+}
+
+message GetForwardingHistoryResponse {
+  repeated bff.bridgr.v1alpha1.ForwardingRecord records = 1;
+}

@@ -5,7 +5,9 @@ modules:
   - path: proto
 lint:
   use:
-    - DEFAULT
+    - STANDARD
+    - IMPORT_USED
+    - PROTOVALIDATE
 breaking:
   use:
     - FILE
