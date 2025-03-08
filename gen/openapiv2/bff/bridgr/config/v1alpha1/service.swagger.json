@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "bff/bridgr/config/v1alpha1/service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ConfigService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "bridgrconfigv1alpha1GetConfigResponse": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/v1alpha1ConfigData"
+        }
+      }
+    },
+    "bridgrconfigv1alpha1RegisterDeviceResponse": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/v1alpha1DeviceRole"
+        }
+      }
+    },
+    "bridgrconfigv1alpha1UpdateConfigResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1alpha1AssignDeviceGroupResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "v1alpha1ConfigData": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/v1alpha1ConfigSource"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1alpha1ConfigSource": {
+      "type": "string",
+      "enum": [
+        "CONFIG_SOURCE_UNSPECIFIED",
+        "CONFIG_SOURCE_DASHBOARD",
+        "CONFIG_SOURCE_ANDROID"
+      ],
+      "default": "CONFIG_SOURCE_UNSPECIFIED",
+      "title": "- CONFIG_SOURCE_DASHBOARD: Updated from web dashboard\n - CONFIG_SOURCE_ANDROID: Updated from Android"
+    },
+    "v1alpha1DeviceRole": {
+      "type": "string",
+      "enum": [
+        "DEVICE_ROLE_UNSPECIFIED",
+        "DEVICE_ROLE_ADMIN",
+        "DEVICE_ROLE_USER"
+      ],
+      "default": "DEVICE_ROLE_UNSPECIFIED",
+      "title": "- DEVICE_ROLE_ADMIN: Full access (Dashboard)\n - DEVICE_ROLE_USER: Limited config changes (Android)"
+    },
+    "v1alpha1GetForwardingRulesResponse": {
+      "type": "object",
+      "properties": {
+        "allowedSenders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedApps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1alpha1UpdateForwardingRulesResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "v1alpha1VerifyDeviceResponse": {
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
