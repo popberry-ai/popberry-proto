@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package bff.bridgr.config.v1alpha1;
+
+import "bff/bridgr/config/v1alpha1/enum.proto";
+
+option go_package = "bff/bridgr/config/v1alpha1";
+
+service ConfigService {
+  rpc RegisterDevice(RegisterDeviceRequest) returns (RegisterDeviceResponse);
+  rpc VerifyDevice(VerifyDeviceRequest) returns (VerifyDeviceResponse);
+  rpc AssignDeviceGroup(AssignDeviceGroupRequest) returns (AssignDeviceGroupResponse);
+
+  rpc UpdateForwardingRules(UpdateForwardingRulesRequest) returns (UpdateForwardingRulesResponse);
+  rpc GetForwardingRules(GetForwardingRulesRequest) returns (GetForwardingRulesResponse);
+
+  rpc GetConfig(GetConfigRequest) returns (stream GetConfigResponse);
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+}
+
+message RegisterDeviceRequest {
+  string device_id = 1;
+  string device_name = 2;
+  string device_model = 3;
+}
+
+message RegisterDeviceResponse {
+  string api_key = 1;
+  DeviceRole role = 2;
+}
+
+message VerifyDeviceRequest {
+  string device_id = 1;
+  string api_key = 2;
+}
+
+message VerifyDeviceResponse {
+  bool is_valid = 1;
+}
+
+message AssignDeviceGroupRequest {
+  string device_id = 1;
+  string group_name = 2;
+}
+
+message AssignDeviceGroupResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message UpdateForwardingRulesResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message UpdateConfigResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message UpdateForwardingRulesRequest {
+  string device_id = 1;
+  repeated string allowed_senders = 2; // List of phone numbers allowed to forward SMS
+  repeated string allowed_apps = 3; // List of app package names allowed to forward notifications
+}
+
+message GetForwardingRulesRequest {
+  string device_id = 1;
+}
+
+message GetForwardingRulesResponse {
+  repeated string allowed_senders = 1;
+  repeated string allowed_apps = 2;
+}
