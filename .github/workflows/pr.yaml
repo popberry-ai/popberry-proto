@@ -1,8 +1,9 @@
 name: Buf CI
 on:
   pull_request:
-    types: [opened, synchronize, reopened, labeled, unlabeled]
-  delete:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
 permissions:
   contents: read
   pull-requests: write
