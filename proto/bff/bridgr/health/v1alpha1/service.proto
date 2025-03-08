@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package bff.bridgr.health.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "bff/bridgr/health/v1alpha1";
+
+service HealthService {
+  // Devices send periodic health reports to the server
+  rpc ReportHealth(stream ReportHealthRequest) returns (stream ReportHealthResponse);
+
+  // Dashboard or backend can check health details of a specific device
+  rpc DeviceHealth(DeviceHealthRequest) returns (DeviceHealthResponse);
+}
+
+// Health check request from device
+message ReportHealthRequest {
+  string device_id = 1;
+  string device_name = 2;
+}
+
+// Server response with health status
+message ReportHealthResponse {
+  string device_id = 1;
+  Status status = 2;
+  google.protobuf.Timestamp last_seen = 3;
+}
+
+// Request for a specific device's health status
+message DeviceHealthRequest {
+  string device_id = 1;
+}
+
+// Response with current device health details
+message DeviceHealthResponse {
+  string device_id = 1;
+  Status status = 2;
+  google.protobuf.Timestamp last_seen = 3;
+}
+
+// Enum for device status
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_HEALTHY = 1;
+  STATUS_UNHEALTHY = 2;
+  STATUS_OFFLINE = 3;
+}

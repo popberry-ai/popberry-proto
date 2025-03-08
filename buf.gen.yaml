@@ -4,6 +4,8 @@ managed:
   override:
     - file_option: go_package_prefix
       value: github.com/popberry-ai/popberry-proto/
+    - file_option: java_package_prefix
+      value: ai.popberry.proto
   disable:
     - module: buf.build/googleapis/googleapis
       file_option: go_package_prefix
@@ -22,5 +24,9 @@ plugins:
       - paths=source_relative
   - remote: buf.build/grpc-ecosystem/openapiv2:v2.22.0
     out: gen/openapiv2
+  - remote: buf.build/grpc/kotlin:v1.4.1
+    out: gen/kotlin
+  - remote: buf.build/protocolbuffers/kotlin:v30.0
+    out: gen/kotlin
 inputs:
   - directory: proto

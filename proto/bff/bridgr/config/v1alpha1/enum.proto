@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package bff.bridgr.config.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "bff/bridgr/config/v1alpha1";
+
+enum DeviceRole {
+  DEVICE_ROLE_UNSPECIFIED = 0;
+  DEVICE_ROLE_ADMIN = 1; // Full access (Dashboard)
+  DEVICE_ROLE_USER = 2; // Limited config changes (Android)
+}
+
+enum ConfigSource {
+  CONFIG_SOURCE_UNSPECIFIED = 0;
+  CONFIG_SOURCE_DASHBOARD = 1; // Updated from web dashboard
+  CONFIG_SOURCE_ANDROID = 2; // Updated from Android
+}
+
+enum ForwardingType {
+  FORWARDING_TYPE_UNSPECIFIED = 0;
+  FORWARDING_TYPE_SMS = 1;
+  FORWARDING_TYPE_NOTIFICATION = 2;
+}
+
+message GetConfigRequest {
+  string device_id = 1;
+  string key = 2;
+}
+
+message ConfigData {
+  string key = 1;
+  string value = 2;
+  ConfigSource source = 3;
+  google.protobuf.Timestamp modified_at = 4;
+}
+
+message GetConfigResponse {
+  ConfigData config = 1;
+}
+
+message UpdateConfigRequest {
+  string device_id = 1;
+  repeated ConfigData configs = 2;
+}
