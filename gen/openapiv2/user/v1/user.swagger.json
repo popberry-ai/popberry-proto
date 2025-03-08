@@ -1,0 +1,124 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user/v1/user.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "UsersService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "userv1CreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/userv1User"
+        }
+      }
+    },
+    "userv1DeleteUserResponse": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean"
+        }
+      }
+    },
+    "userv1GetUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/userv1User"
+        }
+      }
+    },
+    "userv1UpdateUserResponse": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean"
+        },
+        "user": {
+          "$ref": "#/definitions/userv1User"
+        }
+      }
+    },
+    "userv1User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "telNo": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "string"
+        },
+        "walletId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CheckUserPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean"
+        },
+        "user": {
+          "$ref": "#/definitions/userv1User"
+        }
+      }
+    }
+  }
+}

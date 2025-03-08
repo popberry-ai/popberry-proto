@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "bff/bridgr/record/v1alpha1/message.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "RecordService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "bridgrrecordv1alpha1Status": {
+      "type": "string",
+      "enum": [
+        "STATUS_UNSPECIFIED",
+        "STATUS_HEALTHY",
+        "STATUS_UNHEALTHY"
+      ],
+      "default": "STATUS_UNSPECIFIED"
+    },
+    "bridgrrecordv1alpha1Type": {
+      "type": "string",
+      "enum": [
+        "TYPE_UNSPECIFIED",
+        "TYPE_SMS",
+        "TYPE_NOTIFICATION"
+      ],
+      "default": "TYPE_UNSPECIFIED"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1alpha1ParsedRecord": {
+      "type": "object",
+      "properties": {
+        "recipient": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "priority": {
+          "$ref": "#/definitions/v1alpha1Priority"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1alpha1Priority": {
+      "type": "string",
+      "enum": [
+        "PRIORITY_UNSPECIFIED",
+        "PRIORITY_LOW",
+        "PRIORITY_MEDIUM",
+        "PRIORITY_HIGH"
+      ],
+      "default": "PRIORITY_UNSPECIFIED"
+    },
+    "v1alpha1RawRecord": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "sender": {
+          "type": "string"
+        },
+        "header": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "encodingType": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1alpha1Record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/bridgrrecordv1alpha1Type"
+        },
+        "status": {
+          "$ref": "#/definitions/bridgrrecordv1alpha1Status"
+        },
+        "parsed": {
+          "$ref": "#/definitions/v1alpha1ParsedRecord"
+        },
+        "raw": {
+          "$ref": "#/definitions/v1alpha1RawRecord"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1alpha1SendRecordResponse": {
+      "type": "object",
+      "properties": {
+        "recordId": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
