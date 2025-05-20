@@ -11,7 +11,7 @@ public inline fun updateBalanceRequest(block: ai.popberry.proto.wallet.v1alpha1.
   ai.popberry.proto.wallet.v1alpha1.UpdateBalanceRequestKt.Dsl._create(ai.popberry.proto.wallet.v1alpha1.UpdateBalanceRequest.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Request message for updating wallet balance
+ * UpdateBalanceRequest contains all information necessary to process a wallet transaction
  * ```
  *
  * Protobuf type `wallet.v1alpha1.UpdateBalanceRequest`
@@ -40,7 +40,7 @@ public object UpdateBalanceRequestKt {
     public class RequestsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
      * ```
-     * List of request and response pairs
+     * Collection of raw request/response data related to this transaction
      * ```
      *
      * `repeated .wallet.v1alpha1.RequestResponse requests = 1 [json_name = "requests"];`
@@ -52,7 +52,7 @@ public object UpdateBalanceRequestKt {
       )
     /**
      * <pre>
-     * List of request and response pairs
+     * Collection of raw request/response data related to this transaction
      * </pre>
      *
      * <code>repeated .wallet.v1alpha1.RequestResponse requests = 1 [json_name = "requests"];</code>
@@ -66,7 +66,7 @@ public object UpdateBalanceRequestKt {
     }
     /**
      * <pre>
-     * List of request and response pairs
+     * Collection of raw request/response data related to this transaction
      * </pre>
      *
      * <code>repeated .wallet.v1alpha1.RequestResponse requests = 1 [json_name = "requests"];</code>
@@ -81,7 +81,7 @@ public object UpdateBalanceRequestKt {
     }
     /**
      * <pre>
-     * List of request and response pairs
+     * Collection of raw request/response data related to this transaction
      * </pre>
      *
      * <code>repeated .wallet.v1alpha1.RequestResponse requests = 1 [json_name = "requests"];</code>
@@ -95,7 +95,7 @@ public object UpdateBalanceRequestKt {
     }
     /**
      * <pre>
-     * List of request and response pairs
+     * Collection of raw request/response data related to this transaction
      * </pre>
      *
      * <code>repeated .wallet.v1alpha1.RequestResponse requests = 1 [json_name = "requests"];</code>
@@ -110,7 +110,7 @@ public object UpdateBalanceRequestKt {
     }
     /**
      * <pre>
-     * List of request and response pairs
+     * Collection of raw request/response data related to this transaction
      * </pre>
      *
      * <code>repeated .wallet.v1alpha1.RequestResponse requests = 1 [json_name = "requests"];</code>
@@ -125,7 +125,7 @@ public object UpdateBalanceRequestKt {
     }
     /**
      * <pre>
-     * List of request and response pairs
+     * Collection of raw request/response data related to this transaction
      * </pre>
      *
      * <code>repeated .wallet.v1alpha1.RequestResponse requests = 1 [json_name = "requests"];</code>
@@ -139,7 +139,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * tenant id
+     * Unique identifier for the tenant (multi-tenancy support)
      * ```
      *
      * `string tenant_id = 2 [json_name = "tenantId"];`
@@ -153,7 +153,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * tenant id
+     * Unique identifier for the tenant (multi-tenancy support)
      * </pre>
      *
      * <code>string tenant_id = 2 [json_name = "tenantId"];</code>
@@ -165,7 +165,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Bet amount
+     * Amount wagered by the user
      * ```
      *
      * `double bet_amount = 3 [json_name = "betAmount"];`
@@ -179,7 +179,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Bet amount
+     * Amount wagered by the user
      * </pre>
      *
      * <code>double bet_amount = 3 [json_name = "betAmount"];</code>
@@ -191,7 +191,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Win amount
+     * Amount won by the user (if applicable)
      * ```
      *
      * `double win_amount = 4 [json_name = "winAmount"];`
@@ -205,7 +205,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Win amount
+     * Amount won by the user (if applicable)
      * </pre>
      *
      * <code>double win_amount = 4 [json_name = "winAmount"];</code>
@@ -217,7 +217,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Win/Loss amount
+     * Net amount (win_amount - bet_amount)
      * ```
      *
      * `double winlose_amount = 5 [json_name = "winloseAmount"];`
@@ -231,7 +231,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Win/Loss amount
+     * Net amount (win_amount - bet_amount)
      * </pre>
      *
      * <code>double winlose_amount = 5 [json_name = "winloseAmount"];</code>
@@ -243,7 +243,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Status of the transaction
+     * Current status of the transaction (e.g., "pending", "completed", "failed")
      * ```
      *
      * `string status = 6 [json_name = "status"];`
@@ -257,7 +257,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Status of the transaction
+     * Current status of the transaction (e.g., "pending", "completed", "failed")
      * </pre>
      *
      * <code>string status = 6 [json_name = "status"];</code>
@@ -269,7 +269,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * User ID (or username)
+     * Unique identifier for the user
      * ```
      *
      * `string user_id = 7 [json_name = "userId"];`
@@ -283,7 +283,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * User ID (or username)
+     * Unique identifier for the user
      * </pre>
      *
      * <code>string user_id = 7 [json_name = "userId"];</code>
@@ -295,7 +295,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Round ID
+     * Identifier for the game round this transaction belongs to
      * ```
      *
      * `string round_id = 8 [json_name = "roundId"];`
@@ -309,7 +309,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Round ID
+     * Identifier for the game round this transaction belongs to
      * </pre>
      *
      * <code>string round_id = 8 [json_name = "roundId"];</code>
@@ -321,7 +321,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Transaction ID
+     * Unique identifier for this transaction
      * ```
      *
      * `string txn_id = 9 [json_name = "txnId"];`
@@ -335,7 +335,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Transaction ID
+     * Unique identifier for this transaction
      * </pre>
      *
      * <code>string txn_id = 9 [json_name = "txnId"];</code>
@@ -347,7 +347,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Parent transaction ID (optional)
+     * Reference to a parent transaction (for multi-part transactions)
      * ```
      *
      * `string parent_id = 10 [json_name = "parentId"];`
@@ -361,7 +361,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Parent transaction ID (optional)
+     * Reference to a parent transaction (for multi-part transactions)
      * </pre>
      *
      * <code>string parent_id = 10 [json_name = "parentId"];</code>
@@ -373,7 +373,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Game ID
+     * Numeric identifier for the game
      * ```
      *
      * `int32 game_id = 11 [json_name = "gameId"];`
@@ -387,7 +387,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Game ID
+     * Numeric identifier for the game
      * </pre>
      *
      * <code>int32 game_id = 11 [json_name = "gameId"];</code>
@@ -399,7 +399,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Game code
+     * String identifier for the game
      * ```
      *
      * `string game_code = 12 [json_name = "gameCode"];`
@@ -413,7 +413,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Game code
+     * String identifier for the game
      * </pre>
      *
      * <code>string game_code = 12 [json_name = "gameCode"];</code>
@@ -425,7 +425,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Provider ID
+     * Numeric identifier for the provider
      * ```
      *
      * `int32 provider_id = 13 [json_name = "providerId"];`
@@ -439,7 +439,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Provider ID
+     * Numeric identifier for the provider
      * </pre>
      *
      * <code>int32 provider_id = 13 [json_name = "providerId"];</code>
@@ -451,7 +451,7 @@ public object UpdateBalanceRequestKt {
 
     /**
      * ```
-     * Provider code
+     * String identifier for the provider
      * ```
      *
      * `string provider_code = 14 [json_name = "providerCode"];`
@@ -465,7 +465,7 @@ public object UpdateBalanceRequestKt {
       }
     /**
      * <pre>
-     * Provider code
+     * String identifier for the provider
      * </pre>
      *
      * <code>string provider_code = 14 [json_name = "providerCode"];</code>
@@ -476,6 +476,10 @@ public object UpdateBalanceRequestKt {
     }
 
     /**
+     * ```
+     * Total amount of bets placed (used for bonus/promotion calculations)
+     * ```
+     *
      * `double turnover = 15 [json_name = "turnover"];`
      */
     public var turnover: kotlin.Double
@@ -486,6 +490,10 @@ public object UpdateBalanceRequestKt {
         _builder.turnover = value
       }
     /**
+     * <pre>
+     * Total amount of bets placed (used for bonus/promotion calculations)
+     * </pre>
+     *
      * <code>double turnover = 15 [json_name = "turnover"];</code>
      * @return This builder for chaining.
      */

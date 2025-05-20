@@ -11,7 +11,8 @@ public inline fun updateTransactionResponseRequest(block: ai.popberry.proto.wall
   ai.popberry.proto.wallet.v1alpha1.UpdateTransactionResponseRequestKt.Dsl._create(ai.popberry.proto.wallet.v1alpha1.UpdateTransactionResponseRequest.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Request message for updating the transaction response after another service has processed the request
+ * UpdateTransactionResponseRequest specifies a transaction to update
+ * and the new response data to associate with it
  * ```
  *
  * Protobuf type `wallet.v1alpha1.UpdateTransactionResponseRequest`
@@ -34,7 +35,7 @@ public object UpdateTransactionResponseRequestKt {
 
     /**
      * ```
-     * Transaction ID to identify which record to update
+     * Identifier of the transaction to update
      * ```
      *
      * `string txn_id = 1 [json_name = "txnId"];`
@@ -48,7 +49,7 @@ public object UpdateTransactionResponseRequestKt {
       }
     /**
      * <pre>
-     * Transaction ID to identify which record to update
+     * Identifier of the transaction to update
      * </pre>
      *
      * <code>string txn_id = 1 [json_name = "txnId"];</code>
@@ -60,7 +61,7 @@ public object UpdateTransactionResponseRequestKt {
 
     /**
      * ```
-     * Updated response data (JSON or any other format)
+     * New response data (typically JSON formatted)
      * ```
      *
      * `string response = 2 [json_name = "response"];`
@@ -74,7 +75,7 @@ public object UpdateTransactionResponseRequestKt {
       }
     /**
      * <pre>
-     * Updated response data (JSON or any other format)
+     * New response data (typically JSON formatted)
      * </pre>
      *
      * <code>string response = 2 [json_name = "response"];</code>

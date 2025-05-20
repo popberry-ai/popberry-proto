@@ -11,7 +11,8 @@ public inline fun identifyUserResponse(block: ai.popberry.proto.wallet.v1alpha1.
   ai.popberry.proto.wallet.v1alpha1.IdentifyUserResponseKt.Dsl._create(ai.popberry.proto.wallet.v1alpha1.IdentifyUserResponse.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Response message for identifying user existence
+ * IdentifyUserResponse indicates whether the user exists and provides
+ * additional context
  * ```
  *
  * Protobuf type `wallet.v1alpha1.IdentifyUserResponse`
@@ -34,7 +35,7 @@ public object IdentifyUserResponseKt {
 
     /**
      * ```
-     * Indicates if the user exists
+     * Whether the user was found in the system
      * ```
      *
      * `bool exists = 1 [json_name = "exists"];`
@@ -48,7 +49,7 @@ public object IdentifyUserResponseKt {
       }
     /**
      * <pre>
-     * Indicates if the user exists
+     * Whether the user was found in the system
      * </pre>
      *
      * <code>bool exists = 1 [json_name = "exists"];</code>
@@ -60,7 +61,7 @@ public object IdentifyUserResponseKt {
 
     /**
      * ```
-     * Optional message for additional information
+     * Additional information about the lookup result
      * ```
      *
      * `string message = 2 [json_name = "message"];`
@@ -74,7 +75,7 @@ public object IdentifyUserResponseKt {
       }
     /**
      * <pre>
-     * Optional message for additional information
+     * Additional information about the lookup result
      * </pre>
      *
      * <code>string message = 2 [json_name = "message"];</code>

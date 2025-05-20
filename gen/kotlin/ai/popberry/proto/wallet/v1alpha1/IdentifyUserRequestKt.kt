@@ -11,7 +11,8 @@ public inline fun identifyUserRequest(block: ai.popberry.proto.wallet.v1alpha1.I
   ai.popberry.proto.wallet.v1alpha1.IdentifyUserRequestKt.Dsl._create(ai.popberry.proto.wallet.v1alpha1.IdentifyUserRequest.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Request message for identifying user existence with various methods
+ * IdentifyUserRequest provides multiple ways to identify a user
+ * At least one field must be specified
  * ```
  *
  * Protobuf type `wallet.v1alpha1.IdentifyUserRequest`
@@ -34,7 +35,7 @@ public object IdentifyUserRequestKt {
 
     /**
      * ```
-     * User ID (optional)
+     * Primary user identifier
      * ```
      *
      * `string user_id = 1 [json_name = "userId"];`
@@ -48,7 +49,7 @@ public object IdentifyUserRequestKt {
       }
     /**
      * <pre>
-     * User ID (optional)
+     * Primary user identifier
      * </pre>
      *
      * <code>string user_id = 1 [json_name = "userId"];</code>
@@ -60,7 +61,7 @@ public object IdentifyUserRequestKt {
 
     /**
      * ```
-     * User Token (optional)
+     * Authentication token for the user
      * ```
      *
      * `string user_token = 2 [json_name = "userToken"];`
@@ -74,7 +75,7 @@ public object IdentifyUserRequestKt {
       }
     /**
      * <pre>
-     * User Token (optional)
+     * Authentication token for the user
      * </pre>
      *
      * <code>string user_token = 2 [json_name = "userToken"];</code>
@@ -86,7 +87,7 @@ public object IdentifyUserRequestKt {
 
     /**
      * ```
-     * Username (optional)
+     * User's login name
      * ```
      *
      * `string username = 3 [json_name = "username"];`
@@ -100,7 +101,7 @@ public object IdentifyUserRequestKt {
       }
     /**
      * <pre>
-     * Username (optional)
+     * User's login name
      * </pre>
      *
      * <code>string username = 3 [json_name = "username"];</code>

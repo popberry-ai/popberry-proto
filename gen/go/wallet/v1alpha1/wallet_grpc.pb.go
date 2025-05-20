@@ -22,20 +22,24 @@ const (
 	WalletService_UpdateBalance_FullMethodName             = "/wallet.v1alpha1.WalletService/UpdateBalance"
 	WalletService_IdentifyUser_FullMethodName              = "/wallet.v1alpha1.WalletService/IdentifyUser"
 	WalletService_UpdateTransactionResponse_FullMethodName = "/wallet.v1alpha1.WalletService/UpdateTransactionResponse"
+	WalletService_GetTransaction_FullMethodName            = "/wallet.v1alpha1.WalletService/GetTransaction"
 )
 
 // WalletServiceClient is the client API for WalletService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// Define the Wallet service
 type WalletServiceClient interface {
-	// Method for updating wallet balance using transaction records
+	// UpdateBalance processes a transaction and updates the wallet balance accordingly
+	// It handles bet placement, win calculation, and transaction recording
 	UpdateBalance(ctx context.Context, in *UpdateBalanceRequest, opts ...grpc.CallOption) (*UpdateBalanceResponse, error)
-	// Method for identifying the existence of a user with various identification methods
+	// IdentifyUser verifies if a user exists in the system using one or more
+	// identification methods (user_id, user_token, or username)
 	IdentifyUser(ctx context.Context, in *IdentifyUserRequest, opts ...grpc.CallOption) (*IdentifyUserResponse, error)
-	// Method for updating the transaction response after another service has processed the request
+	// UpdateTransactionResponse updates the transaction record with additional response
+	// data after processing by external services
 	UpdateTransactionResponse(ctx context.Context, in *UpdateTransactionResponseRequest, opts ...grpc.CallOption) (*UpdateTransactionResponseResponse, error)
+	// GetTransaction retrieves the details of a specific transaction
+	GetTransaction(ctx context.Context, in *GetTransactionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetTransactionResponse], error)
 }
 
 type walletServiceClient struct {
@@ -76,18 +80,40 @@ func (c *walletServiceClient) UpdateTransactionResponse(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *walletServiceClient) GetTransaction(ctx context.Context, in *GetTransactionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetTransactionResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &WalletService_ServiceDesc.Streams[0], WalletService_GetTransaction_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[GetTransactionRequest, GetTransactionResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type WalletService_GetTransactionClient = grpc.ServerStreamingClient[GetTransactionResponse]
+
 // WalletServiceServer is the server API for WalletService service.
 // All implementations must embed UnimplementedWalletServiceServer
 // for forward compatibility.
-//
-// Define the Wallet service
 type WalletServiceServer interface {
-	// Method for updating wallet balance using transaction records
+	// UpdateBalance processes a transaction and updates the wallet balance accordingly
+	// It handles bet placement, win calculation, and transaction recording
 	UpdateBalance(context.Context, *UpdateBalanceRequest) (*UpdateBalanceResponse, error)
-	// Method for identifying the existence of a user with various identification methods
+	// IdentifyUser verifies if a user exists in the system using one or more
+	// identification methods (user_id, user_token, or username)
 	IdentifyUser(context.Context, *IdentifyUserRequest) (*IdentifyUserResponse, error)
-	// Method for updating the transaction response after another service has processed the request
+	// UpdateTransactionResponse updates the transaction record with additional response
+	// data after processing by external services
 	UpdateTransactionResponse(context.Context, *UpdateTransactionResponseRequest) (*UpdateTransactionResponseResponse, error)
+	// GetTransaction retrieves the details of a specific transaction
+	GetTransaction(*GetTransactionRequest, grpc.ServerStreamingServer[GetTransactionResponse]) error
 	mustEmbedUnimplementedWalletServiceServer()
 }
 
@@ -106,6 +132,9 @@ func (UnimplementedWalletServiceServer) IdentifyUser(context.Context, *IdentifyU
 }
 func (UnimplementedWalletServiceServer) UpdateTransactionResponse(context.Context, *UpdateTransactionResponseRequest) (*UpdateTransactionResponseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTransactionResponse not implemented")
+}
+func (UnimplementedWalletServiceServer) GetTransaction(*GetTransactionRequest, grpc.ServerStreamingServer[GetTransactionResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method GetTransaction not implemented")
 }
 func (UnimplementedWalletServiceServer) mustEmbedUnimplementedWalletServiceServer() {}
 func (UnimplementedWalletServiceServer) testEmbeddedByValue()                       {}
@@ -182,6 +211,17 @@ func _WalletService_UpdateTransactionResponse_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WalletService_GetTransaction_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetTransactionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(WalletServiceServer).GetTransaction(m, &grpc.GenericServerStream[GetTransactionRequest, GetTransactionResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type WalletService_GetTransactionServer = grpc.ServerStreamingServer[GetTransactionResponse]
+
 // WalletService_ServiceDesc is the grpc.ServiceDesc for WalletService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -202,6 +242,12 @@ var WalletService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _WalletService_UpdateTransactionResponse_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetTransaction",
+			Handler:       _WalletService_GetTransaction_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "wallet/v1alpha1/wallet.proto",
 }

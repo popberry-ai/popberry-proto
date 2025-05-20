@@ -11,7 +11,8 @@ public inline fun updateTransactionResponseResponse(block: ai.popberry.proto.wal
   ai.popberry.proto.wallet.v1alpha1.UpdateTransactionResponseResponseKt.Dsl._create(ai.popberry.proto.wallet.v1alpha1.UpdateTransactionResponseResponse.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Response message for updating the transaction response
+ * UpdateTransactionResponseResponse indicates the result of updating
+ * transaction response data
  * ```
  *
  * Protobuf type `wallet.v1alpha1.UpdateTransactionResponseResponse`
@@ -34,7 +35,7 @@ public object UpdateTransactionResponseResponseKt {
 
     /**
      * ```
-     * Indicates if the update was successful
+     * Whether the update operation was successful
      * ```
      *
      * `bool success = 1 [json_name = "success"];`
@@ -48,7 +49,7 @@ public object UpdateTransactionResponseResponseKt {
       }
     /**
      * <pre>
-     * Indicates if the update was successful
+     * Whether the update operation was successful
      * </pre>
      *
      * <code>bool success = 1 [json_name = "success"];</code>
@@ -60,7 +61,7 @@ public object UpdateTransactionResponseResponseKt {
 
     /**
      * ```
-     * Optional message for additional information
+     * Additional information about the operation result
      * ```
      *
      * `string message = 2 [json_name = "message"];`
@@ -74,7 +75,7 @@ public object UpdateTransactionResponseResponseKt {
       }
     /**
      * <pre>
-     * Optional message for additional information
+     * Additional information about the operation result
      * </pre>
      *
      * <code>string message = 2 [json_name = "message"];</code>

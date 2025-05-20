@@ -45,80 +45,140 @@
       },
       "additionalProperties": {}
     },
+    "v1alpha1GetTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "txnId": {
+          "type": "string",
+          "title": "Unique identifier for the transaction"
+        },
+        "status": {
+          "type": "string",
+          "title": "Transaction status (e.g., \"pending\", \"completed\", \"failed\")"
+        },
+        "betAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "Amount wagered by the user"
+        },
+        "winAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "Amount won by the user (if applicable)"
+        },
+        "winloseAmount": {
+          "type": "number",
+          "format": "double",
+          "title": "Net amount (win_amount - bet_amount)"
+        },
+        "userId": {
+          "type": "string",
+          "title": "Unique identifier for the user"
+        },
+        "roundId": {
+          "type": "string",
+          "title": "Identifier for the game round this transaction belongs to"
+        },
+        "gameId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Numeric identifier for the game"
+        },
+        "gameCode": {
+          "type": "string",
+          "title": "String identifier for the game"
+        },
+        "providerId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Numeric identifier for the provider"
+        },
+        "providerCode": {
+          "type": "string",
+          "title": "String identifier for the provider"
+        },
+        "turnover": {
+          "type": "number",
+          "format": "double",
+          "title": "Total amount of bets placed (used for bonus/promotion calculations)"
+        }
+      },
+      "title": "GetTransactionResponse provides the details of a transaction"
+    },
     "v1alpha1IdentifyUserResponse": {
       "type": "object",
       "properties": {
         "exists": {
           "type": "boolean",
-          "title": "Indicates if the user exists"
+          "title": "Whether the user was found in the system"
         },
         "message": {
           "type": "string",
-          "title": "Optional message for additional information"
+          "title": "Additional information about the lookup result"
         }
       },
-      "title": "Response message for identifying user existence"
+      "title": "IdentifyUserResponse indicates whether the user exists and provides\nadditional context"
     },
     "v1alpha1RequestResponse": {
       "type": "object",
       "properties": {
         "request": {
           "type": "string",
-          "title": "Request data"
+          "title": "Raw request data (typically JSON formatted)"
         },
         "response": {
           "type": "string",
-          "title": "Response data (JSON or any other format)"
+          "title": "Raw response data (typically JSON formatted)"
         }
       },
-      "title": "Message for request and response pairs"
+      "title": "RequestResponse captures raw request and response data for audit\nand debugging purposes"
     },
     "v1alpha1UpdateBalanceResponse": {
       "type": "object",
       "properties": {
         "success": {
           "type": "boolean",
-          "title": "Indicates if the operation was successful"
+          "title": "Whether the transaction was processed successfully"
         },
         "transactionId": {
           "type": "string",
-          "title": "MongoDB ObjectId as a string"
+          "title": "Unique identifier for the created transaction (typically a MongoDB ObjectId)"
         },
         "before": {
           "type": "number",
           "format": "double",
-          "title": "Balance before the transaction"
+          "title": "User's balance before the transaction was applied"
         },
         "amount": {
           "type": "number",
           "format": "double",
-          "title": "Transaction amount"
+          "title": "The transaction amount (positive for credits, negative for debits)"
         },
         "after": {
           "type": "number",
           "format": "double",
-          "title": "Balance after the transaction"
+          "title": "User's balance after the transaction was applied"
         },
         "message": {
           "type": "string",
-          "title": "Optional message for additional information"
+          "title": "Descriptive message providing additional context about the operation"
         }
       },
-      "title": "Response message for updating wallet balance"
+      "title": "UpdateBalanceResponse provides the result of a balance update operation"
     },
     "v1alpha1UpdateTransactionResponseResponse": {
       "type": "object",
       "properties": {
         "success": {
           "type": "boolean",
-          "title": "Indicates if the update was successful"
+          "title": "Whether the update operation was successful"
         },
         "message": {
           "type": "string",
-          "title": "Optional message for additional information"
+          "title": "Additional information about the operation result"
         }
       },
-      "title": "Response message for updating the transaction response"
+      "title": "UpdateTransactionResponseResponse indicates the result of updating\ntransaction response data"
     }
   }
 }

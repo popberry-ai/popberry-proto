@@ -11,7 +11,7 @@ public inline fun updateBalanceResponse(block: ai.popberry.proto.wallet.v1alpha1
   ai.popberry.proto.wallet.v1alpha1.UpdateBalanceResponseKt.Dsl._create(ai.popberry.proto.wallet.v1alpha1.UpdateBalanceResponse.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Response message for updating wallet balance
+ * UpdateBalanceResponse provides the result of a balance update operation
  * ```
  *
  * Protobuf type `wallet.v1alpha1.UpdateBalanceResponse`
@@ -34,7 +34,7 @@ public object UpdateBalanceResponseKt {
 
     /**
      * ```
-     * Indicates if the operation was successful
+     * Whether the transaction was processed successfully
      * ```
      *
      * `bool success = 1 [json_name = "success"];`
@@ -48,7 +48,7 @@ public object UpdateBalanceResponseKt {
       }
     /**
      * <pre>
-     * Indicates if the operation was successful
+     * Whether the transaction was processed successfully
      * </pre>
      *
      * <code>bool success = 1 [json_name = "success"];</code>
@@ -60,7 +60,7 @@ public object UpdateBalanceResponseKt {
 
     /**
      * ```
-     * MongoDB ObjectId as a string
+     * Unique identifier for the created transaction (typically a MongoDB ObjectId)
      * ```
      *
      * `string transaction_id = 2 [json_name = "transactionId"];`
@@ -74,7 +74,7 @@ public object UpdateBalanceResponseKt {
       }
     /**
      * <pre>
-     * MongoDB ObjectId as a string
+     * Unique identifier for the created transaction (typically a MongoDB ObjectId)
      * </pre>
      *
      * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
@@ -86,7 +86,7 @@ public object UpdateBalanceResponseKt {
 
     /**
      * ```
-     * Balance before the transaction
+     * User's balance before the transaction was applied
      * ```
      *
      * `double before = 3 [json_name = "before"];`
@@ -100,7 +100,7 @@ public object UpdateBalanceResponseKt {
       }
     /**
      * <pre>
-     * Balance before the transaction
+     * User's balance before the transaction was applied
      * </pre>
      *
      * <code>double before = 3 [json_name = "before"];</code>
@@ -112,7 +112,7 @@ public object UpdateBalanceResponseKt {
 
     /**
      * ```
-     * Transaction amount
+     * The transaction amount (positive for credits, negative for debits)
      * ```
      *
      * `double amount = 4 [json_name = "amount"];`
@@ -126,7 +126,7 @@ public object UpdateBalanceResponseKt {
       }
     /**
      * <pre>
-     * Transaction amount
+     * The transaction amount (positive for credits, negative for debits)
      * </pre>
      *
      * <code>double amount = 4 [json_name = "amount"];</code>
@@ -138,7 +138,7 @@ public object UpdateBalanceResponseKt {
 
     /**
      * ```
-     * Balance after the transaction
+     * User's balance after the transaction was applied
      * ```
      *
      * `double after = 5 [json_name = "after"];`
@@ -152,7 +152,7 @@ public object UpdateBalanceResponseKt {
       }
     /**
      * <pre>
-     * Balance after the transaction
+     * User's balance after the transaction was applied
      * </pre>
      *
      * <code>double after = 5 [json_name = "after"];</code>
@@ -164,7 +164,7 @@ public object UpdateBalanceResponseKt {
 
     /**
      * ```
-     * Optional message for additional information
+     * Descriptive message providing additional context about the operation
      * ```
      *
      * `string message = 6 [json_name = "message"];`
@@ -178,7 +178,7 @@ public object UpdateBalanceResponseKt {
       }
     /**
      * <pre>
-     * Optional message for additional information
+     * Descriptive message providing additional context about the operation
      * </pre>
      *
      * <code>string message = 6 [json_name = "message"];</code>

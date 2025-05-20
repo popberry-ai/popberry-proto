@@ -13,7 +13,9 @@ import io.grpc.Status.UNIMPLEMENTED
 import io.grpc.StatusException
 import io.grpc.kotlin.AbstractCoroutineServerImpl
 import io.grpc.kotlin.AbstractCoroutineStub
+import io.grpc.kotlin.ClientCalls.serverStreamingRpc
 import io.grpc.kotlin.ClientCalls.unaryRpc
+import io.grpc.kotlin.ServerCalls.serverStreamingServerMethodDefinition
 import io.grpc.kotlin.ServerCalls.unaryServerMethodDefinition
 import io.grpc.kotlin.StubFor
 import kotlin.String
@@ -21,6 +23,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Holder for Kotlin coroutine-based client and server APIs for wallet.v1alpha1.WalletService.
@@ -44,6 +47,10 @@ public object WalletServiceGrpcKt {
       MethodDescriptor<UpdateTransactionResponseRequest, UpdateTransactionResponseResponse>
     @JvmStatic
     get() = WalletServiceGrpc.getUpdateTransactionResponseMethod()
+
+  public val getTransactionMethod: MethodDescriptor<GetTransactionRequest, GetTransactionResponse>
+    @JvmStatic
+    get() = WalletServiceGrpc.getGetTransactionMethod()
 
   /**
    * A stub for issuing RPCs to a(n) wallet.v1alpha1.WalletService service as suspending coroutines.
@@ -121,6 +128,28 @@ public object WalletServiceGrpcKt {
       callOptions,
       headers
     )
+
+    /**
+     * Returns a [Flow] that, when collected, executes this RPC and emits responses from the
+     * server as they arrive.  That flow finishes normally if the server closes its response with
+     * [`Status.OK`][io.grpc.Status], and fails by throwing a [StatusException] otherwise.  If
+     * collecting the flow downstream fails exceptionally (including via cancellation), the RPC
+     * is cancelled with that exception as a cause.
+     *
+     * @param request The request message to send to the server.
+     *
+     * @param headers Metadata to attach to the request.  Most users will not need this.
+     *
+     * @return A flow that, when collected, emits the responses from the server.
+     */
+    public fun getTransaction(request: GetTransactionRequest, headers: Metadata = Metadata()):
+        Flow<GetTransactionResponse> = serverStreamingRpc(
+      channel,
+      WalletServiceGrpc.getGetTransactionMethod(),
+      request,
+      callOptions,
+      headers
+    )
   }
 
   /**
@@ -174,6 +203,22 @@ public object WalletServiceGrpcKt {
         UpdateTransactionResponseResponse = throw
         StatusException(UNIMPLEMENTED.withDescription("Method wallet.v1alpha1.WalletService.UpdateTransactionResponse is unimplemented"))
 
+    /**
+     * Returns a [Flow] of responses to an RPC for wallet.v1alpha1.WalletService.GetTransaction.
+     *
+     * If creating or collecting the returned flow fails with a [StatusException], the RPC
+     * will fail with the corresponding [io.grpc.Status].  If it fails with a
+     * [java.util.concurrent.CancellationException], the RPC will fail with status
+     * `Status.CANCELLED`.  If creating
+     * or collecting the returned flow fails for any other reason, the RPC will fail with
+     * `Status.UNKNOWN` with the exception as a cause.
+     *
+     * @param request The request from the client.
+     */
+    public open fun getTransaction(request: GetTransactionRequest): Flow<GetTransactionResponse> =
+        throw
+        StatusException(UNIMPLEMENTED.withDescription("Method wallet.v1alpha1.WalletService.GetTransaction is unimplemented"))
+
     final override fun bindService(): ServerServiceDefinition = builder(getServiceDescriptor())
       .addMethod(unaryServerMethodDefinition(
       context = this.context,
@@ -189,6 +234,11 @@ public object WalletServiceGrpcKt {
       context = this.context,
       descriptor = WalletServiceGrpc.getUpdateTransactionResponseMethod(),
       implementation = ::updateTransactionResponse
+    ))
+      .addMethod(serverStreamingServerMethodDefinition(
+      context = this.context,
+      descriptor = WalletServiceGrpc.getGetTransactionMethod(),
+      implementation = ::getTransaction
     )).build()
   }
 }

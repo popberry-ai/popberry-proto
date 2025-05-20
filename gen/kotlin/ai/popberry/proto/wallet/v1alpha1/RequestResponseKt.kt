@@ -11,7 +11,8 @@ public inline fun requestResponse(block: ai.popberry.proto.wallet.v1alpha1.Reque
   ai.popberry.proto.wallet.v1alpha1.RequestResponseKt.Dsl._create(ai.popberry.proto.wallet.v1alpha1.RequestResponse.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Message for request and response pairs
+ * RequestResponse captures raw request and response data for audit
+ * and debugging purposes
  * ```
  *
  * Protobuf type `wallet.v1alpha1.RequestResponse`
@@ -34,7 +35,7 @@ public object RequestResponseKt {
 
     /**
      * ```
-     * Request data
+     * Raw request data (typically JSON formatted)
      * ```
      *
      * `string request = 1 [json_name = "request"];`
@@ -48,7 +49,7 @@ public object RequestResponseKt {
       }
     /**
      * <pre>
-     * Request data
+     * Raw request data (typically JSON formatted)
      * </pre>
      *
      * <code>string request = 1 [json_name = "request"];</code>
@@ -60,7 +61,7 @@ public object RequestResponseKt {
 
     /**
      * ```
-     * Response data (JSON or any other format)
+     * Raw response data (typically JSON formatted)
      * ```
      *
      * `string response = 2 [json_name = "response"];`
@@ -74,7 +75,7 @@ public object RequestResponseKt {
       }
     /**
      * <pre>
-     * Response data (JSON or any other format)
+     * Raw response data (typically JSON formatted)
      * </pre>
      *
      * <code>string response = 2 [json_name = "response"];</code>
